@@ -1,0 +1,24 @@
+package psql
+
+import (
+	"database/sql"
+	_ "github.com/lib/pq"
+)
+
+type DB struct{ *sql.DB }
+
+func NewConnect(dataSourceName string) (*DB, error) {
+	db, err := sql.Open("postgres", dataSourceName)
+	if err != nil {
+		return nil, err
+	}
+	if err = db.Ping(); err != nil {
+		return nil, err
+	}
+	return &DB{db}, nil
+}
+
+func (db *DB) Scheme(scheme string) error {
+	_, err := db.Exec(scheme)
+	return err
+}
