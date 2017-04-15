@@ -5,6 +5,7 @@ import (
 	"os"
 	"TruckMonitor-Backend/psql"
 	"TruckMonitor-Backend/service"
+	"TruckMonitor-Backend/token"
 	"fmt"
 	"strconv"
 	"io/ioutil"
@@ -44,7 +45,8 @@ func main() {
 	}
 
 	// Route
-	env := &service.Environment{db}
-	appService := &service.AppService{serviceHost, env}
+	tokenAccount := &token.AccountToken{Key: []byte("37FjfjU7vka80OU3r520Yy2T7h0p7h7AM") }
+	env := &service.Environment{Token: tokenAccount, DB: &service.DB{Account: db }}
+	appService := &service.AppService{Port: serviceHost, Environment: env}
 	appService.Run()
 }
