@@ -1,0 +1,56 @@
+###############
+### GO Lang ###
+###############
+*.[568vq]
+*.a
+*.cgo1.go
+*.cgo2.c
+*.exe
+*.o
+*.out
+*.prof
+*.test
+*.so
+_obj
+_test
+[568vq].out
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+_testmain.go
+/vendor
+
+/.idea/*.xml
+/.idea/*/*
+
+
+###############
+### Windows ###
+###############
+$RECYCLE.BIN/
+*.cab
+*.lnk
+*.msi
+*.msm
+*.msp
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
+
+###############
+###  Linux  ###
+###############
+*~
+.directory
+.fuse_hidden*
+.Trash-*
+
+
+###############
+###  MacOS  ###
+###############
+._*
+.AppleDouble
+*.DS_Store
+.LSOverride
