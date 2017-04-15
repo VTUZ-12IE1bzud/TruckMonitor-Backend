@@ -132,3 +132,6 @@ CREATE TABLE contract_subject(
   hazard_id INTEGER NOT NULL REFERENCES hazard,
 	amount REAL NOT NULL,
 	price REAL NOT NULL);
+
+INSERT INTO account (role, surmane, name, patronymic, date_of_birth, email, password, photo, phone)
+		VALUES ('admin', 'Иванов', 'Иван', 'Иванович', '1990-12-3', 'ivanov@truck.ru', 'test','http://images.clipartpanda.com/driver-clipart-smiling-driver-in-car-holding-steering-wheel.jpg', '88000000000');
