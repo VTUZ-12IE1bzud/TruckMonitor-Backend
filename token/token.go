@@ -5,12 +5,12 @@ import (
 	"errors"
 )
 
-type TokenParser interface {
+type AccountToken interface {
 	Create(accountId int) (string, error)
 	Parse(tokenString string) (int, error)
 }
 
-type AccountToken struct {
+type Source struct {
 	Key []byte
 }
 
@@ -19,16 +19,16 @@ type claims struct {
 	jwt.StandardClaims
 }
 
-func (token *AccountToken) Create(accountId int) (string, error) {
+func (src *Source) Create(accountId int) (string, error) {
 	newToken := jwt.NewWithClaims(jwt.SigningMethodHS256, claims{
 		AccountId: accountId, StandardClaims: jwt.StandardClaims{Issuer: "TruckMonitor"},
 	})
-	return newToken.SignedString(token.Key)
+	return newToken.SignedString(src.Key)
 }
 
-func (a *AccountToken) Parse(tokenString string) (int, error) {
+func (src *Source) Parse(tokenString string) (int, error) {
 	userToken, err := jwt.ParseWithClaims(tokenString, &claims{}, func(token *jwt.Token) (interface{}, error) {
-		return a.Key, nil
+		return src.Key, nil
 	})
 	if err != nil {
 		return -1, err

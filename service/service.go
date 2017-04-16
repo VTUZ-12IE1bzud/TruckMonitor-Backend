@@ -17,7 +17,7 @@ type DB struct {
 }
 
 type Environment struct {
-	Token token.TokenParser
+	Token token.AccountToken
 	*DB
 }
 
