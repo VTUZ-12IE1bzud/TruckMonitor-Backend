@@ -2,6 +2,13 @@ package model
 
 import "time"
 
+// Статус грузоперевозки
+const (
+	CURRENT string = "current"
+	ARCHIVE string = "archive"
+	ONWARD  string = "onward"
+)
+
 type (
 	// Грузоперевозка
 	Carriage struct {

@@ -2,6 +2,14 @@ package model
 
 import "time"
 
+// Роль сотрудника
+const (
+	ADMIN string = "admin"
+	ACCOUNTANT string = "accountant"
+	MANAGER string = "manager"
+	DRIVER string = "driver"
+)
+
 // Сотрудник
 type Employee struct {
 	Id         int
