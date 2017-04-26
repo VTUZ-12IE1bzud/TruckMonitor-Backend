@@ -4,7 +4,7 @@ import "time"
 
 type (
 	// Договор
-	Contact struct {
+	Contract struct {
 		Id                      int
 		ManagerId               int
 		ClientId                int
