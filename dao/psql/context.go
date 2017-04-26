@@ -8,46 +8,36 @@ import (
 )
 
 type (
-	Connect interface {
-		New() (*context, error)
-	}
-
-	connect struct {
-		host     string
-		port     string
-		user     string
-		password string
-		dbName   string
-		sslMode  string
-	}
-)
-
-type (
-	Context interface {
+	PsqlContext interface {
+		GetDb() *sql.DB
 		Close()
-		InitScheme(scheme string) error
+		SchemeInit(scheme string) error
 	}
 
-	context struct {
-		Context
-		*sql.DB
+	psqlContext struct {
+		db *sql.DB
 	}
 )
 
-func NewConnect(host string, port string, user string, password string, dbName string) Connect {
-	return Connect(&connect{
-		host:     host,
-		port:     port,
-		user:     user,
-		password: password,
-		dbName:   dbName,
-		sslMode:  "disable",
-	})
+func (c *psqlContext) GetDb() *sql.DB {
+	return c.db
 }
 
-func (c *connect) New() (*context, error) {
+func (c *psqlContext) Close() {
+	c.db.Close()
+}
+
+func (c *psqlContext) SchemeInit(scheme string) error {
+	if _, err := c.db.Exec(scheme); err != nil {
+		log.Println(err)
+		return err
+	}
+	return nil
+}
+
+func NewConnect(host string, port string, user string, password string, dbName string, sslMode string) (PsqlContext, error) {
 	connectString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
-		c.host, c.port, c.user, c.password, c.dbName, c.sslMode)
+		host, port, user, password, dbName, sslMode)
 	db, err := sql.Open("postgres", connectString)
 	if err != nil {
 		log.Println(err)
@@ -57,17 +47,5 @@ func (c *connect) New() (*context, error) {
 		log.Println(err)
 		return nil, err
 	}
-	return &context{Context(db), db}, nil
-}
-
-func (c *context) Close() {
-	c.DB.Close()
-}
-
-func (c *context) InitScheme(scheme string) error {
-	if _, err := c.DB.Exec(scheme); err != nil {
-		log.Println(err)
-		return err
-	}
-	return nil
+	return &psqlContext{db }, nil
 }
