@@ -25,7 +25,8 @@ type (
 
 	// Конфигурация сервера
 	ServerConfiguration struct {
-		Port string
+		Port     string
+		TokenKey string
 	}
 )
 
@@ -53,6 +54,7 @@ func buildPsqlConfiguration() *PsqlConfiguration {
 func buildServerConfiguration() *ServerConfiguration {
 	return &ServerConfiguration{
 		Port: lookupEnvOrDefault("SERVER_PORT", ":8080"),
+		TokenKey: lookupEnvOrDefault("TOKEN_KEY", ""),
 	}
 }
 

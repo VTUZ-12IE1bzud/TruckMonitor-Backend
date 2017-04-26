@@ -3,21 +3,25 @@ package context
 type ApplicationContext interface {
 	DbContext() DbContext
 	DaoContext() DaoContext
-	//ServiceContext() ServiceContext
+	ServiceContext() ServiceContext
 }
 
 type applicationContext struct {
 	dbContext  DbContext
 	daoContext DaoContext
-	//serviceContext ServiceContext
+	serviceContext ServiceContext
 }
 
 func (c *applicationContext) DbContext() DbContext {
-	return c.dbContext;
+	return c.dbContext
 }
 
 func (c *applicationContext) DaoContext() DaoContext {
-	return c.daoContext;
+	return c.daoContext
+}
+
+func (c *applicationContext) ServiceContext() ServiceContext {
+	return c.serviceContext
 }
 
 func NewApplicationContext(configuration Configuration) (ApplicationContext, error) {
@@ -29,5 +33,6 @@ func NewApplicationContext(configuration Configuration) (ApplicationContext, err
 	return &applicationContext{
 		dbContext:  db,
 		daoContext: daoContext,
+		serviceContext: NewServiceContext(configuration.ServerConfiguration.TokenKey, daoContext),
 	}, nil
 }

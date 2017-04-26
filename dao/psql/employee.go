@@ -31,7 +31,7 @@ func (dao *psqlEmployee) FindById(id int) (*model.Employee, error) {
 
 func (dao *psqlEmployee) FindByEmailAndPassword(email string, password string) (*model.Employee, error) {
 	var data model.Employee
-	row := dao.db().QueryRow("SELECT * FROM employee WHERE email=$1 AND password=md5($2)", email, password)
+	row := dao.db().QueryRow("SELECT * FROM employee WHERE email=$1 AND password=$2", email, password)
 	err := row.Scan(&data.Id, &data.Role, &data.Surname, &data.Name, &data.Patronymic, &data.BirthDate,
 		&data.Email, &data.Password, &data.Photo, &data.Phone)
 	if err != nil {
