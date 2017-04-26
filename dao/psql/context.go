@@ -1,10 +1,10 @@
 package psql
 
 import (
-	"log"
 	"database/sql"
-	_ "github.com/lib/pq"
 	"fmt"
+	_ "github.com/lib/pq"
+	"log"
 )
 
 type (
@@ -47,5 +47,5 @@ func NewConnect(host string, port string, user string, password string, dbName s
 		log.Println(err)
 		return nil, err
 	}
-	return &psqlContext{db }, nil
+	return &psqlContext{db}, nil
 }

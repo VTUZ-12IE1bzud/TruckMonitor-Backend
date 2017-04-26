@@ -2,8 +2,8 @@ package psql
 
 import (
 	"TruckMonitor-Backend/dao"
-	"database/sql"
 	"TruckMonitor-Backend/model"
+	"database/sql"
 	"log"
 )
 

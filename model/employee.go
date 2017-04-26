@@ -4,10 +4,10 @@ import "time"
 
 // Роль сотрудника
 const (
-	ADMIN string = "admin"
+	ADMIN      string = "admin"
 	ACCOUNTANT string = "accountant"
-	MANAGER string = "manager"
-	DRIVER string = "driver"
+	MANAGER    string = "manager"
+	DRIVER     string = "driver"
 )
 
 // Сотрудник

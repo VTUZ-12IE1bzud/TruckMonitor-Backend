@@ -43,5 +43,3 @@ func (s authenticationService) ResolveToken(sessionToken string) (*model.Employe
 	}
 	return s.userService.Get(token.EmployeeId)
 }
-
-

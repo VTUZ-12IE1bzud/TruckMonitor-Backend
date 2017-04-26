@@ -2,9 +2,9 @@ package controller
 
 import (
 	"TruckMonitor-Backend/context"
-	"gopkg.in/gin-gonic/gin.v1"
-	"TruckMonitor-Backend/controller/common"
 	"TruckMonitor-Backend/controller/authentication"
+	"TruckMonitor-Backend/controller/common"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 type Router interface {

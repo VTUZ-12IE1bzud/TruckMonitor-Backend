@@ -53,7 +53,7 @@ func buildPsqlConfiguration() *PsqlConfiguration {
 
 func buildServerConfiguration() *ServerConfiguration {
 	return &ServerConfiguration{
-		Port: lookupEnvOrDefault("SERVER_PORT", ":8080"),
+		Port:     lookupEnvOrDefault("SERVER_PORT", ":8080"),
 		TokenKey: lookupEnvOrDefault("TOKEN_KEY", ""),
 	}
 }

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"TruckMonitor-Backend/model"
 	"TruckMonitor-Backend/dao"
+	"TruckMonitor-Backend/model"
 	"crypto/md5"
 	"encoding/hex"
 )
@@ -24,11 +24,9 @@ func NewUserService(employeeDao dao.EmployeeDao) UserService {
 	}
 }
 
-
 func (s userService) Get(id int) (*model.Employee, error) {
 	return s.employeeDao.FindById(id)
 }
-
 
 func (s userService) Validate(email string, password string) (*model.Employee, error) {
 	return s.employeeDao.FindByEmailAndPassword(email, computeHash(password))

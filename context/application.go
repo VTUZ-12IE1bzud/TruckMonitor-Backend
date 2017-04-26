@@ -7,8 +7,8 @@ type ApplicationContext interface {
 }
 
 type applicationContext struct {
-	dbContext  DbContext
-	daoContext DaoContext
+	dbContext      DbContext
+	daoContext     DaoContext
 	serviceContext ServiceContext
 }
 
@@ -31,8 +31,8 @@ func NewApplicationContext(configuration Configuration) (ApplicationContext, err
 	}
 	daoContext := NewDaoContext(db)
 	return &applicationContext{
-		dbContext:  db,
-		daoContext: daoContext,
+		dbContext:      db,
+		daoContext:     daoContext,
 		serviceContext: NewServiceContext(configuration.ServerConfiguration.TokenKey, daoContext),
 	}, nil
 }

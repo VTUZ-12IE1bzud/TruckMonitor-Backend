@@ -22,7 +22,7 @@ func (c *controller) Authenticated() gin.HandlerFunc {
 			context.AbortWithStatus(http.StatusBadRequest)
 			return
 		}
-			context.Set(PARAM_EMPLOYEE_ID, employee.Id)
-			context.Next()
+		context.Set(PARAM_EMPLOYEE_ID, employee.Id)
+		context.Next()
 	}
 }

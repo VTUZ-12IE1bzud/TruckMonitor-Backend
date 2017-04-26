@@ -2,8 +2,8 @@ package psql
 
 import (
 	"TruckMonitor-Backend/dao"
-	"database/sql"
 	"TruckMonitor-Backend/model"
+	"database/sql"
 )
 
 type psqlMeasure struct {
@@ -18,7 +18,7 @@ func (dao *psqlMeasure) db() *sql.DB {
 	return dao.context.GetDb()
 }
 
-func (dao * psqlMeasure) FindById(id int) (*model.Measure, error) {
+func (dao *psqlMeasure) FindById(id int) (*model.Measure, error) {
 	var data model.Measure
 	row := dao.db().QueryRow("SELECT * FROM measure WHERE id=$1", id)
 	err := row.Scan(&data.Id, &data.Name, &data.Abbreviation)

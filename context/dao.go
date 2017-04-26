@@ -71,7 +71,7 @@ func (dao *daoContext) VehicleDao() dao.VehicleDao {
 	return dao.vehicleDao
 }
 
-func NewDaoContext(psqlContext psql.PsqlContext) (DaoContext) {
+func NewDaoContext(psqlContext psql.PsqlContext) DaoContext {
 	return &daoContext{
 		carriageDao:     psql.CarriageDao(psqlContext),
 		checkPointDao:   psql.CheckPointDao(psqlContext),

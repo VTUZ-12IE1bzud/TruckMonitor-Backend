@@ -1,10 +1,10 @@
 package service
 
 import (
-	"TruckMonitor-Backend/model"
 	"TruckMonitor-Backend/dao"
-	"github.com/dgrijalva/jwt-go"
+	"TruckMonitor-Backend/model"
 	"errors"
+	"github.com/dgrijalva/jwt-go"
 )
 
 type TokenService interface {
