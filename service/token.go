@@ -13,13 +13,13 @@ type TokenService interface {
 }
 
 type tokenService struct {
-	key         string
+	key         []byte
 	employeeDao dao.EmployeeDao
 }
 
 func NewTokenService(key string, employeeDao dao.EmployeeDao) TokenService {
 	return &tokenService{
-		key:         key,
+		key:         []byte(key),
 		employeeDao: employeeDao,
 	}
 }
