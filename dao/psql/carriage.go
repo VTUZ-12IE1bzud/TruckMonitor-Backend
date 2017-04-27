@@ -42,8 +42,8 @@ func (dao *psqlCarriageDao) FindByDriveAndStatus(driverId int, status string) ([
 	return items, nil
 }
 
-func (dao *psqlCarriageDao) FindDetailById(id int) ([]*model.CarriageDetail, error) {
-	rows, err := dao.db().Query("SELECT * FROM carriage_detail WHERE id=$1", id)
+func (dao *psqlCarriageDao) FindDetailById(carriageId int) ([]*model.CarriageDetail, error) {
+	rows, err := dao.db().Query("SELECT * FROM carriage_detail WHERE carriage_id=$1", carriageId)
 	if err != nil {
 		log.Println(err)
 		return nil, err
