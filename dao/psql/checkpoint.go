@@ -21,8 +21,7 @@ func (dao *psqlCheckPoint) db() *sql.DB {
 func (dao *psqlCheckPoint) FindById(id int) (*model.CheckPoint, error) {
 	var data model.CheckPoint
 	row := dao.db().QueryRow("SELECT * FROM check_point WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.Name, &data.Address, &data.Latitude, &data.Longitude)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.Name, &data.Address, &data.Latitude, &data.Longitude); err != nil {
 		return nil, err
 	}
 	return &data, nil

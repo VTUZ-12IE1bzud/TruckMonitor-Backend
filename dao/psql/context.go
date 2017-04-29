@@ -35,17 +35,15 @@ func (c *psqlContext) SchemeInit(scheme string) error {
 	return nil
 }
 
-func NewConnect(host string, port string, user string, password string, dbName string, sslMode string) (PsqlContext, error) {
+func NewConnect(host string, port string, user string, password string, dbName string, sslMode string) PsqlContext {
 	connectString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		host, port, user, password, dbName, sslMode)
 	db, err := sql.Open("postgres", connectString)
 	if err != nil {
-		log.Println(err)
-		return nil, err
+		log.Panic(err)
 	}
 	if err = db.Ping(); err != nil {
-		log.Println(err)
-		return nil, err
+		log.Panic(err)
 	}
-	return &psqlContext{db}, nil
+	return &psqlContext{db}
 }

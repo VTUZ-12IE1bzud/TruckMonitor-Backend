@@ -21,8 +21,7 @@ func (dao *psqlNomenclature) db() *sql.DB {
 func (dao *psqlNomenclature) FindById(id int) (*model.Nomenclature, error) {
 	var data model.Nomenclature
 	row := dao.db().QueryRow("SELECT * FROM nomenclature WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.MeasureId, &data.Name)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.MeasureId, &data.Name); err != nil {
 		return nil, err
 	}
 	return &data, nil

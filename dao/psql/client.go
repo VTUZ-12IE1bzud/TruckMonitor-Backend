@@ -21,8 +21,7 @@ func (dao *psqlClient) db() *sql.DB {
 func (dao *psqlClient) FindById(id int) (*model.Client, error) {
 	var data model.Client
 	row := dao.db().QueryRow("SELECT * FROM client WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.Name, &data.Itn, &data.Iec, &data.Address)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.Name, &data.Itn, &data.Iec, &data.Address); err != nil {
 		return nil, err
 	}
 	return &data, nil

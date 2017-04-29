@@ -4,7 +4,6 @@ import (
 	"TruckMonitor-Backend/dao"
 	"TruckMonitor-Backend/model"
 	"database/sql"
-	"log"
 )
 
 type psqlCarriageDao struct {
@@ -28,15 +27,12 @@ func (dao *psqlCarriageDao) FindByDriveAndStatus(driverId int, status string) ([
 	items := make([]*model.Carriage, 0)
 	for rows.Next() {
 		item := new(model.Carriage)
-		err := rows.Scan(&item.Id, &item.Status, &item.VehicleId, &item.DriverId)
-		if err != nil {
-			log.Println(err)
-		} else {
-			items = append(items, item)
+		if err := rows.Scan(&item.Id, &item.Status, &item.VehicleId, &item.DriverId); err != nil {
+			return nil, err
 		}
+		items = append(items, item)
 	}
 	if err = rows.Err(); err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	return items, nil
@@ -45,19 +41,16 @@ func (dao *psqlCarriageDao) FindByDriveAndStatus(driverId int, status string) ([
 func (dao *psqlCarriageDao) FindDetailById(carriageId int) ([]*model.CarriageDetail, error) {
 	rows, err := dao.db().Query("SELECT * FROM carriage_detail WHERE carriage_id=$1", carriageId)
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	defer rows.Close()
 	items := make([]*model.CarriageDetail, 0)
 	for rows.Next() {
 		item := new(model.CarriageDetail)
-		err := rows.Scan(&item.Id, &item.CarriageId, &item.ContractId)
-		if err != nil {
-			log.Println(err)
-		} else {
-			items = append(items, item)
+		if err := rows.Scan(&item.Id, &item.CarriageId, &item.ContractId); err != nil {
+			return nil, err
 		}
+		items = append(items, item)
 	}
 	if err = rows.Err(); err != nil {
 		return nil, err
@@ -68,18 +61,24 @@ func (dao *psqlCarriageDao) FindDetailById(carriageId int) ([]*model.CarriageDet
 func (dao *psqlCarriageDao) FindRouteByCarriage(carriageId int) ([]*model.CarriageRoute, error) {
 	rows, err := dao.db().Query("SELECT * FROM carriage_route WHERE carriage_id=$1", carriageId)
 	if err != nil {
-		log.Println(err)
 		return nil, err
 	}
 	defer rows.Close()
 	items := make([]*model.CarriageRoute, 0)
 	for rows.Next() {
+		var strPlanned sql.NullString
+		var strFact sql.NullString
 		item := new(model.CarriageRoute)
-		err := rows.Scan(&item.Id, &item.CarriageId, &item.CheckPointId, &item.Planned, &item.Fact)
-		if err != nil {
-			log.Println(err)
-		} else {
-			items = append(items, item)
+
+		if err := rows.Scan(&item.Id, &item.CarriageId, &item.CheckPointId, &strPlanned, &strFact); err != nil {
+			return nil, err
+		}
+
+		if item.Planned, err = str2DateRFC3339(strPlanned); err != nil {
+			return nil, err
+		}
+		if item.Fact, err = str2DateRFC3339(strFact); err != nil {
+			return nil, err
 		}
 	}
 	if err = rows.Err(); err != nil {

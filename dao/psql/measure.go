@@ -21,8 +21,7 @@ func (dao *psqlMeasure) db() *sql.DB {
 func (dao *psqlMeasure) FindById(id int) (*model.Measure, error) {
 	var data model.Measure
 	row := dao.db().QueryRow("SELECT * FROM measure WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.Name, &data.Abbreviation)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.Name, &data.Abbreviation); err != nil {
 		return nil, err
 	}
 	return &data, nil

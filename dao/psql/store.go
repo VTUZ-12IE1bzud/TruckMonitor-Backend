@@ -21,8 +21,7 @@ func (dao *psqlStore) db() *sql.DB {
 func (dao *psqlStore) FindById(id int) (*model.Store, error) {
 	var data model.Store
 	row := dao.db().QueryRow("SELECT * FROM store WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.Name, &data.Address, &data.Latitude, &data.Longitude)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.Name, &data.Address, &data.Latitude, &data.Longitude); err != nil {
 		return nil, err
 	}
 	return &data, nil

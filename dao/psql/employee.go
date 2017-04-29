@@ -21,9 +21,8 @@ func (dao *psqlEmployee) db() *sql.DB {
 func (dao *psqlEmployee) FindById(id int) (*model.Employee, error) {
 	var data model.Employee
 	row := dao.db().QueryRow("SELECT * FROM employee WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.Role, &data.Surname, &data.Name, &data.Patronymic, &data.BirthDate,
-		&data.Email, &data.Password, &data.Photo, &data.Phone)
-	if err != nil {
+	if err := row.Scan(&data.Id, &data.Role, &data.Surname, &data.Name, &data.Patronymic, &data.BirthDate,
+		&data.Email, &data.Password, &data.Photo, &data.Phone); err != nil {
 		return nil, err
 	}
 	return &data, nil
@@ -32,9 +31,9 @@ func (dao *psqlEmployee) FindById(id int) (*model.Employee, error) {
 func (dao *psqlEmployee) FindByEmailAndPassword(email string, password string) (*model.Employee, error) {
 	var data model.Employee
 	row := dao.db().QueryRow("SELECT * FROM employee WHERE email=$1 AND password=$2", email, password)
-	err := row.Scan(&data.Id, &data.Role, &data.Surname, &data.Name, &data.Patronymic, &data.BirthDate,
-		&data.Email, &data.Password, &data.Photo, &data.Phone)
-	if err != nil {
+
+	if err := row.Scan(&data.Id, &data.Role, &data.Surname, &data.Name, &data.Patronymic, &data.BirthDate,
+		&data.Email, &data.Password, &data.Photo, &data.Phone); err != nil {
 		return nil, err
 	}
 	return &data, nil

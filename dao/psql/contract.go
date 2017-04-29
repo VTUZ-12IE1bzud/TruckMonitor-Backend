@@ -4,7 +4,6 @@ import (
 	"TruckMonitor-Backend/dao"
 	"TruckMonitor-Backend/model"
 	"database/sql"
-	"log"
 )
 
 type psqlContract struct {
@@ -22,10 +21,9 @@ func (dao *psqlContract) db() *sql.DB {
 func (dao *psqlContract) FindById(id int) (*model.Contract, error) {
 	var data model.Contract
 	row := dao.db().QueryRow("SELECT * FROM contract WHERE id=$1", id)
-	err := row.Scan(&data.Id, &data.ManagerId, &data.ClientId, &data.PackagingId, &data.StoreFromId,
+	if err := row.Scan(&data.Id, &data.ManagerId, &data.ClientId, &data.PackagingId, &data.StoreFromId,
 		&data.StoreBeforeId, &data.Number, &data.Price, &data.ConfirmationPaymentLink,
-		&data.ConfirmationCustomsLink, &data.DateShipment)
-	if err != nil {
+		&data.ConfirmationCustomsLink, &data.DateShipment); err != nil {
 		return nil, err
 	}
 	return &data, nil
@@ -40,12 +38,10 @@ func (dao *psqlContract) FindDetails(contractId int) ([]*model.ContractDetail, e
 	items := make([]*model.ContractDetail, 0)
 	for rows.Next() {
 		item := new(model.ContractDetail)
-		err := rows.Scan(&item.Id, &item.ContractId, &item.NomenclatureId, &item.Amount, &item.Price)
-		if err != nil {
-			log.Println(err)
-		} else {
-			items = append(items, item)
+		if err := rows.Scan(&item.Id, &item.ContractId, &item.NomenclatureId, &item.Amount, &item.Price); err != nil {
+			return nil, err
 		}
+		items = append(items, item)
 	}
 	if err = rows.Err(); err != nil {
 		return nil, err
