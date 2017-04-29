@@ -12,7 +12,7 @@ type (
 	}
 )
 
-func (c *controller) Get(context *gin.Context) {
+func (c *controller) GetToken(context *gin.Context) {
 	email := context.Query("email")
 	password := context.Query("password")
 

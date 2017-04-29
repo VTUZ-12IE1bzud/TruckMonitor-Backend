@@ -24,15 +24,13 @@ func (c *applicationContext) ServiceContext() ServiceContext {
 	return c.serviceContext
 }
 
-func NewApplicationContext(configuration Configuration) (ApplicationContext, error) {
-	db, err := NewDbContext(configuration)
-	if err != nil {
-		return nil, err
-	}
+func NewApplicationContext(configuration Configuration) ApplicationContext {
+	db := NewDbContext(configuration)
 	daoContext := NewDaoContext(db)
+
 	return &applicationContext{
 		dbContext:      db,
 		daoContext:     daoContext,
 		serviceContext: NewServiceContext(configuration.ServerConfiguration.TokenKey, daoContext),
-	}, nil
+	}
 }

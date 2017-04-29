@@ -27,7 +27,7 @@ type (
 		Id           int
 		ModelId      int
 		Vin          string
-		LicencePlate float32
+		LicencePlate string
 		RegionNumber int
 	}
 )

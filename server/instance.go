@@ -10,10 +10,8 @@ type Instance struct {
 }
 
 func (instance Instance) Start() error {
-	appContext, err := context.NewApplicationContext(instance.Configuration)
-	if err != nil {
-		return err
-	}
+	appContext := context.NewApplicationContext(instance.Configuration)
+
 	defer appContext.DbContext().Close()
 	return controller.NewRouter(appContext).Run(instance.Configuration.ServerConfiguration.Port)
 }

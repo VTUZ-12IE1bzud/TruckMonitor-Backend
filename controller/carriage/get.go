@@ -1,34 +1,34 @@
 package carriage
 
 import (
-	"TruckMonitor-Backend/model"
-	"time"
-	"fmt"
 	"TruckMonitor-Backend/controller/authentication"
-	"log"
+	"TruckMonitor-Backend/model"
 	"errors"
+	"fmt"
 	"gopkg.in/gin-gonic/gin.v1"
+	"log"
 	"net/http"
+	"time"
 )
 
 type (
 	currentResponse struct {
-		Id         int `json:"id"`
-		Carriages  []Carriage `json:"carriages"`
+		Id         int           `json:"id"`
+		Carriages  []Carriage    `json:"carriages"`
 		CheckPoint []*checkPoint `json:"checkPoints"`
 	}
 
 	Carriage struct {
-		Contract      *Contract `json:"contract"`
+		Contract      *Contract       `json:"contract"`
 		Nomenclatures []*Nomenclature `json:"nomenclatures"`
 	}
 
 	Contract struct {
-		Number      string `json:"number"`
-		CustomsLink string `json:"customsLink"`
-		From        Store `json:"from"`
-		Before      Store `json:"before"`
-		Packaging   string `json:"packaging"`
+		Number      string   `json:"number"`
+		CustomsLink string   `json:"customsLink"`
+		From        Store    `json:"from"`
+		Before      Store    `json:"before"`
+		Packaging   string   `json:"packaging"`
 		Manager     *manager `json:"manager"`
 	}
 
@@ -51,8 +51,8 @@ type (
 
 	checkPoint struct {
 		Coordinates *coordinates `json:"coordinates"`
-		Planned     string `json:"planned"`
-		Fact        string `json:"fact"`
+		Planned     string       `json:"planned"`
+		Fact        string       `json:"fact"`
 	}
 
 	coordinates struct {

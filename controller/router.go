@@ -3,9 +3,9 @@ package controller
 import (
 	"TruckMonitor-Backend/context"
 	"TruckMonitor-Backend/controller/authentication"
+	"TruckMonitor-Backend/controller/carriage"
 	"TruckMonitor-Backend/controller/common"
 	"gopkg.in/gin-gonic/gin.v1"
-	"TruckMonitor-Backend/controller/carriage"
 )
 
 type Router interface {
@@ -26,7 +26,7 @@ func (r router) Run(port string) error {
 	api := gin.Default()
 	v1 := api.Group("/api/v1")
 	{
-		v1.GET("/login", authenticationController.Get)
+		v1.GET("/login", authenticationController.GetToken)
 		v1.Use(authenticationController.Authenticated())
 		{
 			v1.GET("/carriage/current", carriageController.GetCurrent)
