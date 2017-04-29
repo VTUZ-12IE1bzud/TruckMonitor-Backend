@@ -80,6 +80,7 @@ func (dao *psqlCarriageDao) FindRouteByCarriage(carriageId int) ([]*model.Carria
 		if item.Fact, err = str2DateRFC3339(strFact); err != nil {
 			return nil, err
 		}
+		items = append(items, item)
 	}
 	if err = rows.Err(); err != nil {
 		return nil, err
