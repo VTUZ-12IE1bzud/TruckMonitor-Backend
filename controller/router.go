@@ -7,6 +7,7 @@ import (
 	"TruckMonitor-Backend/controller/common"
 	"gopkg.in/gin-gonic/gin.v1"
 	"TruckMonitor-Backend/controller/checkpoint"
+	"TruckMonitor-Backend/controller/me"
 )
 
 type Router interface {
@@ -23,6 +24,7 @@ func (r router) Run(port string) error {
 	authenticationController := authentication.Controller(r.context.ServiceContext().AuthenticationService())
 	carriageController := carriage.Controller(r.context.DaoContext())
 	checkPointController := checkpoint.Controller(r.context.DaoContext().CarriageDao())
+	meController := me.Controller(r.context.DaoContext().EmployeeDao())
 
 	// Route
 	api := gin.Default()
@@ -35,6 +37,7 @@ func (r router) Run(port string) error {
 			v1.GET("/carriage/archive", carriageController.GetArchive)
 			v1.GET("/carriage/onward", carriageController.GetOnward)
 			v1.POST("/checkpoint/:checkpoint", checkPointController.CreateFactTimestamp)
+			v1.GET("/me", meController.GetMe)
 		}
 	}
 	api.NoRoute(commonController.NotFound)
