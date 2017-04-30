@@ -3,13 +3,6 @@ package carriage
 import "time"
 
 type (
-
-	currentResponse struct {
-		Id         int           `json:"id"`
-		Carriages  []carriage    `json:"carriages"`
-		CheckPoint []checkPoint `json:"checkPoints"`
-	}
-
 	carriage struct {
 		Contract      contract       `json:"contract"`
 		Nomenclatures []nomenclature `json:"nomenclatures"`
@@ -42,6 +35,8 @@ type (
 	}
 
 	checkPoint struct {
+		Name        string `json:"name"`
+		Address     string `json:"address"`
 		Coordinates coordinates `json:"coordinates"`
 		Planned     time.Time       `json:"planned"`
 		Fact        *time.Time       `json:"fact"`

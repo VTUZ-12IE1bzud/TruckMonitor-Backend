@@ -30,6 +30,8 @@ func (r router) Run(port string) error {
 		v1.Use(authenticationController.Authenticated())
 		{
 			v1.GET("/carriage/current", carriageController.GetCurrent)
+			v1.GET("/carriage/archive", carriageController.GetArchive)
+			v1.GET("/carriage/onward", carriageController.GetOnward)
 		}
 	}
 	api.NoRoute(commonController.NotFound)

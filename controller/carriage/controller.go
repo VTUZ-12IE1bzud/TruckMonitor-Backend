@@ -27,13 +27,13 @@ func (c *controller) getContract(contractId int) (result contract, err error) {
 	if result.From, err = c.getStore(contract.StoreFromId); err != nil {
 		return
 	}
-	if 	result.Before, err = c.getStore(contract.StoreBeforeId); err != nil {
+	if result.Before, err = c.getStore(contract.StoreBeforeId); err != nil {
 		return
 	}
-	if 	result.Manager, err = c.getManager(contract.ManagerId); err != nil {
+	if result.Manager, err = c.getManager(contract.ManagerId); err != nil {
 		return
 	}
-	if 	result.Packaging, err = c.getPackaging(contract.PackagingId); err != nil {
+	if result.Packaging, err = c.getPackaging(contract.PackagingId); err != nil {
 		return
 	}
 	return
@@ -48,8 +48,6 @@ func (c *controller) getStore(storeId int) (result store, err error) {
 	result.Address = store.Address
 	return
 }
-
-
 
 func (c *controller) getPackaging(packagingId int) (result string, err error) {
 	packaging, err := c.dao.PackagingDao().FindById(packagingId)
@@ -112,33 +110,28 @@ func (c *controller) getCheckPoints(carriageId int) (result []checkPoint, err er
 		return
 	}
 	for _, route := range routes {
-		var coordinate coordinates
-		coordinate, err = c.getCoordinates(route.CheckPointId)
+		var cp *model.CheckPoint
+		cp, err = c.dao.CheckPointDao().FindById(route.CheckPointId)
 		if err != nil {
 			return
 		}
+
 		item := checkPoint{
-			Coordinates: coordinate,
-			Planned:     route.Planned.UTC(),
+			Name:    cp.Name,
+			Address: cp.Address,
+			Coordinates: coordinates{
+				Longitude: cp.Longitude,
+				Latitude:  cp.Latitude,
+			},
+			Planned: route.Planned.UTC(),
 		}
 		if route.Fact.IsZero() {
 			item.Fact = nil
 		} else {
-			var time = route.Fact.UTC(); item.Fact = &time
+			var time = route.Fact.UTC();
+			item.Fact = &time
 		}
 		result = append(result, item)
-	}
-	return
-}
-
-func (c *controller) getCoordinates(checkPointId int) (result coordinates, err error) {
-	checkPoint, err := c.dao.CheckPointDao().FindById(checkPointId)
-	if err != nil {
-		return
-	}
-	result = coordinates{
-		Longitude: checkPoint.Longitude,
-		Latitude:  checkPoint.Latitude,
 	}
 	return
 }

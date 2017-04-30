@@ -289,24 +289,24 @@ INSERT INTO check_point(id, name, address, latitude, longitude)
 INSERT INTO check_point(id, name, address, latitude, longitude)
     VALUES (9, '高道汽車', 'Гонконг, Kam Tin, Kam Sheung Rd, 106', 22.788984, 114.096886);
 
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (1, 1, 9, '2017-02-01 15:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (2, 1, 8, '2017-02-03 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (3, 1, 7, '2017-02-05 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (4, 1, 6, '2017-02-06 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (5, 1, 5, '2017-02-08 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (6, 1, 4, '2017-02-10 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (7, 1, 6, '2017-02-11 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (8, 1, 2, '2017-02-12 12:00:00');
-INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
-    VALUES (9, 1, 1, '2017-02-13 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (1, 1, 9, '2017-02-01 15:00:00', '2017-02-01 15:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (2, 1, 8, '2017-02-03 12:00:00', '2017-02-03 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (3, 1, 7, '2017-02-05 12:00:00', '2017-02-05 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (4, 1, 6, '2017-02-06 12:00:00', '2017-02-06 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (5, 1, 5, '2017-02-08 12:00:00', '2017-02-08 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (6, 1, 4, '2017-02-10 12:00:00', '2017-02-10 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (7, 1, 6, '2017-02-11 12:00:00', '2017-02-11 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (8, 1, 2, '2017-02-12 12:00:00', '2017-02-12 12:00:00');
+INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned, timestamp_fact)
+    VALUES (9, 1, 1, '2017-02-13 12:00:00', '2017-02-13 12:00:00');
 INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
     VALUES (10, 2, 8, '2017-04-22 12:00:00');
 INSERT INTO carriage_route(id, carriage_id, check_point_id, timestamp_planned)
