@@ -1,0 +1,10 @@
+PostgreSQL:
+  restart: always
+  image: postgres
+  container_name: TruckMonitor_PSQL
+  environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=TruckMonitor
+  ports:
+    - "2020:5432"

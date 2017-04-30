@@ -1,0 +1,1 @@
+docker run -it -p 8080:8080 --rm --link TruckMonitor_PSQL -e SERVICE_HOST=:8080 -e TOKEN_KEY=37FjfjU7vka80OU3r520Yy2T7h0p7h7AM -e DB_HOST=TruckMonitor_PSQL -e DB_PORT=5432 -e DB_DATABASE=TruckMonitor -e DB_USER=postgres -e DB_PASSWORD=postgres -e DB_INITIALIZATION=true truckmonitor
