@@ -11,21 +11,21 @@ import (
 
 type (
 	currentResponse struct {
-		Id         int           `json:"id"`
-		Carriages  []carriage    `json:"carriages"`
+		Id         int          `json:"id"`
+		Carriages  []carriage   `json:"carriages"`
 		CheckPoint []checkPoint `json:"checkPoints"`
 	}
 )
 type (
 	archiveResponse struct {
-		Id          int    `json:"id"`
+		Id          int          `json:"id"`
 		CheckPoints []checkPoint `json:"checkPoints"`
 	}
 )
 
 type (
 	onwardResponse struct {
-		Id          int    `json:"id"`
+		Id          int          `json:"id"`
 		CheckPoints []checkPoint `json:"checkPoints"`
 	}
 )
@@ -59,7 +59,7 @@ func (c *controller) GetCurrent(context *gin.Context) {
 		return
 	}
 	result := currentResponse{
-		Id:currentCarriage.Id,
+		Id: currentCarriage.Id,
 	}
 
 	for _, carriageDetail := range carriageDetails {

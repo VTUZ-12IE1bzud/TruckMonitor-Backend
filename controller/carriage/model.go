@@ -9,11 +9,11 @@ type (
 	}
 
 	contract struct {
-		Number      string   `json:"number"`
-		CustomsLink string   `json:"customsLink"`
-		From        store    `json:"from"`
-		Before      store    `json:"before"`
-		Packaging   string   `json:"packaging"`
+		Number      string  `json:"number"`
+		CustomsLink string  `json:"customsLink"`
+		From        store   `json:"from"`
+		Before      store   `json:"before"`
+		Packaging   string  `json:"packaging"`
 		Manager     manager `json:"manager"`
 	}
 
@@ -35,12 +35,12 @@ type (
 	}
 
 	checkPoint struct {
-		Id          int`json:"id"`
-		Name        string `json:"name"`
-		Address     string `json:"address"`
+		Id          int         `json:"id"`
+		Name        string      `json:"name"`
+		Address     string      `json:"address"`
 		Coordinates coordinates `json:"coordinates"`
-		Planned     time.Time       `json:"planned"`
-		Fact        *time.Time       `json:"fact"`
+		Planned     time.Time   `json:"planned"`
+		Fact        *time.Time  `json:"fact"`
 	}
 
 	coordinates struct {

@@ -94,10 +94,10 @@ func (dao *psqlCarriageDao) CreateFactTimestamp(carriageId int, checkPointId int
 	if err != nil {
 		return err
 	}
-	_, err = tx.Exec("UPDATE carriage_route SET timestamp_fact=$1 " +
+	_, err = tx.Exec("UPDATE carriage_route SET timestamp_fact=$1 "+
 		"WHERE carriage_id=$2 AND check_point_id=$3", time, carriageId, checkPointId)
 	if err != nil {
-		return  err
+		return err
 	}
 	return tx.Commit()
 }

@@ -4,10 +4,10 @@ import (
 	"TruckMonitor-Backend/context"
 	"TruckMonitor-Backend/controller/authentication"
 	"TruckMonitor-Backend/controller/carriage"
-	"TruckMonitor-Backend/controller/common"
-	"gopkg.in/gin-gonic/gin.v1"
 	"TruckMonitor-Backend/controller/checkpoint"
+	"TruckMonitor-Backend/controller/common"
 	"TruckMonitor-Backend/controller/me"
+	"gopkg.in/gin-gonic/gin.v1"
 )
 
 type Router interface {

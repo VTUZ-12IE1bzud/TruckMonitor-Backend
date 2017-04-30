@@ -129,7 +129,7 @@ func (c *controller) getCheckPoints(carriageId int) (result []checkPoint, err er
 		if route.Fact.IsZero() {
 			item.Fact = nil
 		} else {
-			var time = route.Fact.UTC();
+			var time = route.Fact.UTC()
 			item.Fact = &time
 		}
 		result = append(result, item)

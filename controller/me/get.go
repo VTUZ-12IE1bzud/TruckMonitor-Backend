@@ -1,23 +1,23 @@
 package me
 
 import (
-	"log"
 	"TruckMonitor-Backend/controller/authentication"
-	"time"
 	"gopkg.in/gin-gonic/gin.v1"
+	"log"
 	"net/http"
+	"time"
 )
 
 type (
 	meResponse struct {
-		Role       string `json:"role"`
-		Surname    string `json:"surname"`
-		Name       string `json:"name"`
-		Patronymic string `json:"patronymic"`
+		Role       string    `json:"role"`
+		Surname    string    `json:"surname"`
+		Name       string    `json:"name"`
+		Patronymic string    `json:"patronymic"`
 		BirthDate  time.Time `json:"birthDate"`
-		Email      string `json:"email"`
-		Photo      string `json:"photo"`
-		Phone      string `json:"phone"`
+		Email      string    `json:"email"`
+		Photo      string    `json:"photo"`
+		Phone      string    `json:"phone"`
 	}
 )
 

@@ -1,17 +1,17 @@
 package checkpoint
 
 import (
-	"gopkg.in/gin-gonic/gin.v1"
 	"TruckMonitor-Backend/controller/authentication"
-	"log"
-	"errors"
 	"TruckMonitor-Backend/model"
+	"errors"
+	"gopkg.in/gin-gonic/gin.v1"
+	"log"
 	"net/http"
-	"time"
 	"strconv"
+	"time"
 )
 
-func (c *controller) CreateFactTimestamp (context *gin.Context) {
+func (c *controller) CreateFactTimestamp(context *gin.Context) {
 	checkPointId, err := strconv.Atoi(context.Param("checkpoint"))
 	if err != nil {
 		context.AbortWithStatus(http.StatusBadRequest)
