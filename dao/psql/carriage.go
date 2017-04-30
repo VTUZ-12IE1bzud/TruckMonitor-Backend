@@ -4,6 +4,7 @@ import (
 	"TruckMonitor-Backend/dao"
 	"TruckMonitor-Backend/model"
 	"database/sql"
+	"time"
 )
 
 type psqlCarriageDao struct {
@@ -86,4 +87,17 @@ func (dao *psqlCarriageDao) FindRouteByCarriage(carriageId int) ([]*model.Carria
 		return nil, err
 	}
 	return items, nil
+}
+
+func (dao *psqlCarriageDao) CreateFactTimestamp(carriageId int, checkPointId int, time time.Time) error {
+	tx, err := dao.db().Begin()
+	if err != nil {
+		return err
+	}
+	_, err = tx.Exec("UPDATE carriage_route SET timestamp_fact=$1 " +
+		"WHERE carriage_id=$2 AND check_point_id=$3", time, carriageId, checkPointId)
+	if err != nil {
+		return  err
+	}
+	return tx.Commit()
 }

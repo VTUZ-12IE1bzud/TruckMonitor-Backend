@@ -117,6 +117,7 @@ func (c *controller) getCheckPoints(carriageId int) (result []checkPoint, err er
 		}
 
 		item := checkPoint{
+			Id:      cp.Id,
 			Name:    cp.Name,
 			Address: cp.Address,
 			Coordinates: coordinates{
